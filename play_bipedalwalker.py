@@ -13,15 +13,13 @@ if __name__ == "__main__":
     env = gym.make("BipedalWalker-v3", hardcore=False, render_mode="human")
     state = env.reset()[0]
 
-    max_t = 1000
     score = 0
-    for i in range(max_t):
+    while True:
         action = agent.act(state,add_noise=False) * ACTION_SCALE
-        print(action)
         next_state, reward, done, truncated, info = env.step(action)
         state = next_state
         score += reward
-        if done:
+        if done or truncated:
             break
 
     print(score)

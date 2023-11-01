@@ -8,9 +8,9 @@ class OUNoise:
     """
 
     def __init__(self, size, mu=0., theta=0.15, sigma=0.2):
-        self.mu = mu * np.ones(size)  # global mean
-        self.theta = theta            #strength to pull towards the mean
-        self.sigma = sigma            # global mean
+        self.mu = mu * np.ones(size)  
+        self.theta = theta            
+        self.sigma = sigma          
         self.reset()
 
     def reset(self):
@@ -27,12 +27,10 @@ class GaussianNoise:
     """
     Gaussian noise
     """
-    def __init__(self,action_size,scale):
+    def __init__(self,action_size,sigma):
         self.action_size = action_size
-        self.scale = scale
-
-    def reset(self):
-        pass
+        self.sigma = sigma
     
     def sample(self):
-        return np.random.randn(self.action_size) * self.scale
+        # 平均0, 標準偏差 sigmaの正規分布
+        return np.random.normal(0, self.sigma, self.action_size)

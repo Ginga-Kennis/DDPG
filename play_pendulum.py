@@ -13,14 +13,13 @@ if __name__ == "__main__":
     env = gym.make("Pendulum-v1", g=9.81, render_mode="human")
     state = env.reset()[0]
 
-    max_t = 200
     score = 0
-    for i in range(max_t):
-        action = agent.act(state,add_noise=False) * ACTION_SCALE
+    while True:
+        action = agent.act(state, add_noise=False) * ACTION_SCALE
         next_state, reward, done, truncated, info = env.step(action)
         state = next_state
         score += reward
-        if done:
+        if done or truncated:
             break
 
     print(score)
