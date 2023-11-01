@@ -2,11 +2,16 @@ import torch
 import gymnasium as gym
 from src.agent import Agent
 
+# Agent parameter
+STATE_SIZE = 24
+ACTION_SIZE = 4
+
+# Action recaling
 ACTION_SCALE = 1
 
 if __name__ == "__main__":
     # Agent with pretrained model
-    agent = Agent(state_size=24, action_size=4)
+    agent = Agent(STATE_SIZE, ACTION_SIZE)
     agent.actor.load_state_dict(torch.load("./data/bipedalwalker_actor.pth"))
     agent.critic.load_state_dict(torch.load("./data/bipedalwalker_critic.pth"))
 

@@ -3,19 +3,19 @@ import gymnasium as gym
 from src.agent import Agent
 
 # Agent parameter
-STATE_SIZE = 3
-ACTION_SIZE = 1
+STATE_SIZE = 39
+ACTION_SIZE = 28
 
 # Action recaling
-ACTION_SCALE = 2
+ACTION_SCALE = 1
 
 if __name__ == "__main__":
     # Agent with pretrained model
     agent = Agent(STATE_SIZE, ACTION_SIZE)
-    agent.actor.load_state_dict(torch.load("./data/pendulum_actor.pth"))
-    agent.critic.load_state_dict(torch.load("./data/pendulum_critic.pth"))
+    agent.actor.load_state_dict(torch.load("./data/door_actor.pth"))
+    agent.critic.load_state_dict(torch.load("./data/door_critic.pth"))
 
-    env = gym.make("Pendulum-v1", g=9.81, render_mode="human")
+    env = gym.make('AdroitHandDoor-v1', render_mode="human", max_episode_steps=400)
     state = env.reset()[0]
 
     score = 0
@@ -29,6 +29,3 @@ if __name__ == "__main__":
 
     print(score)
     env.close()
-
-
-
