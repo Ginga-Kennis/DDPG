@@ -41,7 +41,7 @@ class Agent:
 
         # Noise
         # self.noise = OUNoise(action_size)
-        self.noise = GaussianNoise(action_size,scale=0.25)
+        self.noise = GaussianNoise(action_size,scale=1.0)
 
         # Replay memory
         self.memory = ReplayBuffer(action_size, BUFFER_SIZE, BATCH_SIZE, device)
